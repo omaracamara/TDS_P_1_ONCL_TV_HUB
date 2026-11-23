@@ -5,6 +5,8 @@ services:
     name: tv-hub
     runtime: node
     plan: free
+    # PI2 criterion 7: only GitHub Actions may request a deployment after successful CI.
+    autoDeploy: false
     buildCommand: npm ci && npm run build
     startCommand: npm start
     healthCheckPath: /health
