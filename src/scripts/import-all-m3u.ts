@@ -14,6 +14,7 @@ const countriesByPlaylist: Record<string, string> = {
 };
 
 async function importAllPlaylists(): Promise<void> {
+  // PI2 channel requirement: load the five playlist resources included in this project.
   const playlistDirectory = path.join(process.cwd(), 'docs');
   const playlistFiles = (await readdir(playlistDirectory))
     .filter((file) => file.endsWith('_playlist.m3u'))

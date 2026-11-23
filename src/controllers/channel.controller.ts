@@ -76,5 +76,6 @@ export const getChannel: RequestHandler = async (request, response) => {
   // Completa el método de Response que envía el Channel al frontend.
   // Objetivo: regresar la información del canal en formato JSON.
   // Resultado esperado: el cliente debe recibir un objeto con la propiedad channel.
+  // PI2: esta respuesta permite que la interfaz pública confirme el canal persistido en Atlas.
   response.json({ channel });
 };

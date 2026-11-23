@@ -7,7 +7,8 @@ import { Channel } from '../src/models/channel.model.js';
 let mongo: MongoMemoryServer;
 
 beforeAll(async () => {
-  mongo = await MongoMemoryServer.create();
+  // PI2 CI diagnostic: allow enough time for MongoDB binaries to start on slower GitHub runners.
+  mongo = await MongoMemoryServer.create({ instance: { launchTimeout: 60_000 } });
   await mongoose.connect(mongo.getUri());
 });
 
@@ -22,7 +23,8 @@ beforeEach(async () => {
 
 afterAll(async () => {
   await mongoose.disconnect();
-  await mongo.stop();
+  // PI2 CI diagnostic: avoid masking the original setup failure if MongoDB never started.
+  if (mongo) await mongo.stop();
 });
 
 test('GET /api/channels returns active channels', async () => {
