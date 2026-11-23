@@ -90,7 +90,6 @@ function createCountrySection(country, channels) {
 }
 
 function updateCategoryFilter(channels) {
-  // Keep the full initial list visible while a category filter is active.
   if (categoryFilter.value) return;
   const names = [...new Set(channels.flatMap((channel) => channel.categories))].sort();
   if (names.join('|') === categoryNames.join('|')) return;

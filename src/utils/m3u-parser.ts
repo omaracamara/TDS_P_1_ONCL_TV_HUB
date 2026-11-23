@@ -35,7 +35,6 @@ function readAttributes(line: string): Record<string, string> {
 }
 
 function readChannelInfo(line: string): ChannelInfo | undefined {
-  // The final comma separates M3U attributes from the visible channel name.
   const nameSeparator = line.lastIndexOf(',');
   if (nameSeparator === -1) return undefined;
 
@@ -50,7 +49,6 @@ function readChannelInfo(line: string): ChannelInfo | undefined {
     name,
     logoUrl: attributes['tvg-logo'] || fallbackLogoUrl,
     categories,
-    // We trust this explicit label from the playlist without making network requests.
     isActive: !name.includes('[Geo-blocked]'),
     tvgId: attributes['tvg-id'] || undefined,
     httpReferrer: attributes['http-referrer'] || undefined,
@@ -74,7 +72,6 @@ function readOption(line: string, optionName: string): string | undefined {
   return line.startsWith(prefix) ? line.slice(prefix.length).trim() || undefined : undefined;
 }
 
-// Reads the common #EXTINF + URL M3U format used by the local playlists.
 export function parseM3u(playlist: string, country: string): ImportedChannel[] {
   const cleanCountry = country.trim();
   if (!cleanCountry) throw new Error('Country is required to import a playlist');

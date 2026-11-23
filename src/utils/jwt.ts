@@ -18,7 +18,6 @@ export function createAccessToken(userId: string, role: Role): string {
 }
 
 export function createRefreshToken(userId: string, sessionId: string): string {
-  // jti makes each rotation a distinct signed token, even within the same second.
   return jwt.sign({ sub: userId, sid: sessionId, jti: randomUUID() }, env.refreshSecret, { expiresIn: env.refreshTokenTtl as jwt.SignOptions['expiresIn'] });
 }
 

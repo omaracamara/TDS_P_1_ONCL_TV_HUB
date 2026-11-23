@@ -8,7 +8,6 @@ const favoriteSchema = new Schema(
   { timestamps: true }
 );
 
-// A channel can only appear once in each user's library.
 favoriteSchema.index({ userId: 1, channelId: 1 }, { unique: true });
 
 export const Favorite = model('Favorite', favoriteSchema);

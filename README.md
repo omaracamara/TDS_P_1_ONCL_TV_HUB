@@ -42,3 +42,18 @@ Para favoritos intervienen `home.js`, `favorite.routes.ts`, `authenticate`, `fav
 ## URL de la aplicación publicada
 Link: https://tds-p-1-oncl-tv-hub.onrender.com
 
+## Práctica 3
+
+### 1. Arquitectura
+
+```mermaid
+flowchart LR
+    U[Usuarios] -->|HTTPS| R[Render<br/>TV Hub Node.js]
+    G[GitHub<br/>Repositorio] -->|Push o Pull Request| A[GitHub Actions]
+    A -->|npm ci<br/>npm test<br/>npm run build| A
+    A -->|Push a main<br/>y CI exitoso| H[Deploy Hook]
+    H -->|Solicita despliegue| R
+    R -->|MONGO_URI| M[(MongoDB Atlas)]
+```
+
+

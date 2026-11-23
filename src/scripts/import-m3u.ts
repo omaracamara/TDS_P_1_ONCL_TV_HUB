@@ -4,7 +4,6 @@ import { Channel } from '../models/channel.model.js';
 import { parseM3u } from '../utils/m3u-parser.js';
 
 async function importPlaylist(): Promise<void> {
-  // PI2 channel requirement: support incremental import to update visible Atlas channels.
   const [filePath, country] = process.argv.slice(2);
 
   if (!filePath || !country) {

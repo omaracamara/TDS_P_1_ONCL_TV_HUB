@@ -17,7 +17,6 @@ export const listChannels: RequestHandler = async (request, response) => {
   const country = readQueryValue(request.query.country);
   const requestedSort = readQueryValue(request.query.sort);
 
-  // Start by showing only channels that are available to viewers.
   const filter: Record<string, unknown> = { isActive: true };
 
   if (search) {
@@ -37,7 +36,6 @@ export const listChannels: RequestHandler = async (request, response) => {
     filter.country = new RegExp(`^${escapeRegularExpression(country)}$`, 'i');
   }
 
-  // Only allow the two simple sorts that we want to explain in this version.
   const sort = requestedSort === 'country' ? 'country name' : 'name';
   const channels = await Channel.find(filter).sort(sort);
 
